@@ -18,7 +18,7 @@ We have found that the data does not contain any missing data. As shown by `figu
 
 ![](/figures/fig2.png)
 
-*Figure 2: Scatterplot of trasaction time and amount*
+*Figure 2: Scatterplot of transaction time and amount*
 
 ![](/figures/fig4.png)
 
@@ -45,19 +45,23 @@ Then, we want to see if standardization can improve some of the algorithm's perf
 
 ##### Algorithm Tuning
 
-We then implement grid search on KNN to fine tune the parameters as KNN has the best performance on the precision-recall curve. We have found that k = 3 is an ideal option to give the best f1-score of 0.830783 among all the threshold values we have chosen (1,3,5,6,7,8,9,10,11).  
+We then implement grid search on KNN to fine tune the parameters as KNN has the best performance on the precision-recall curve. We have found that k = 3 is an ideal option to give the best f1-score of 0.831 among all the threshold values we have chosen (1,3,5,6,7,8,9,10,11).  
 
 #### Ensemble Methods
 
-In an attempt to improve model performance, we try using ensemble methods. These methods include baggingclassifier (BR), Random Forest Classifier (RF), AdaBoost Classifier (AB), Gradient Boosting Classifier (GB), Extra Trees Classifier (ET), Voting Classifier (VT). Similarly, we first fit them with the original data, then standardized data. We have found that RF and ET perform the best. We then fine-tune the ET algorithm and realized that setting the parameter `n_estimators` equal to 100 gives us the best performance among all other values we tried (10,50,100,150,200,300,500,1000)
+In an attempt to improve model performance, we try using ensemble methods. These methods include baggingclassifier (BR), Random Forest Classifier (RF), AdaBoost Classifier (AB), Gradient Boosting Classifier (GB), Extra Trees Classifier (ET), Voting Classifier (VT) (see `figure 6`). Similarly, we first fit them with the original data, then standardized data. We have found that RF and ET perform the best with a f1-score of 0.849. We then fine-tune the ET algorithm and realized that setting the parameter `n_estimators` equal to 100 gives us the best performance among all other values we tried (10,50,100,150,200,300,500,1000)
+
+![](/figures/fig7.png)
+
+*Figure 6: Precision-recall curve for all ensemble algorithms based on the original data*
 
 #### Neural Network
 
-(Work in progress)
+We have also attempted to use a simple neural network (NN) for this problem. Our NN model has 2 hidden layers, one with 10 nodes and another has 8 nodes and ReLU acitvation functions. The output layer uses sigmoid activation function. We found that simple NN doesn't necessarily give a better result. It has only f1-score of 0.18. We leave the work of developing deep learning models for this problem in the future.
 
 ## Conclusion and discussion
 
-(Work in progress)
+In conclusion, we are able to acheive f1-score of 0.85 with extra trees classifier using ensemble methods. We see that standardizing data does improve some of the algorithm's performance with K-nearest neighbors being most noteworthy. The number of trees for the extra tree classifier does not necessarily give us better results in this case. Moreover, simple neural network performs particularly poorly in this setting. The future work is to investigate how to improve neural network models to achieve higher recall and precision.
 
 ## Data Source
 [Credit Card Fraud Detection](https://www.kaggle.com/mlg-ulb/creditcardfraud). 
